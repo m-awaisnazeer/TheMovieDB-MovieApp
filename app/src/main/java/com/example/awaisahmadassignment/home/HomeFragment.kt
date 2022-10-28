@@ -9,12 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.awaisahmadassignment.common.data.MovieRepositoryImp
 import com.example.awaisahmadassignment.common.data.api.TheMovieDbApi
 import com.example.awaisahmadassignment.common.data.cache.MovieDatabase
+import com.example.awaisahmadassignment.common.pagging.LoaderAdapter
 import com.example.awaisahmadassignment.common.presentation.MovieAdapter
+import com.example.awaisahmadassignment.common.utils.Constants
 import com.example.awaisahmadassignment.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -45,7 +50,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.moviesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         val adapter = MovieAdapter()
-        binding.moviesRecyclerView.adapter = adapter
+        binding.moviesRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = LoaderAdapter(),
+            footer = LoaderAdapter()
+        )
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -61,10 +69,21 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun getMovieApi(baseUrl: String = "https://api.themoviedb.org/3/"): TheMovieDbApi {
+    fun getMovieApi(): TheMovieDbApi {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(
+                ChuckerInterceptor.Builder(requireContext())
+                    .collector(ChuckerCollector(requireContext()))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(true)
+                    .build()
+            )
+            .build()
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .client(client)
+            .baseUrl(Constants.BASE_URL)
             .build().create(TheMovieDbApi::class.java)
     }
 

@@ -7,11 +7,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.awaisahmadassignment.common.data.cache.model.CachedMovie
+import com.example.awaisahmadassignment.common.domain.model.Movie
 import com.example.awaisahmadassignment.common.utils.Constants.MOVIE_PATH
 import com.example.awaisahmadassignment.databinding.MovieItemBinding
 
-class MovieAdapter: PagingDataAdapter<CachedMovie, MovieAdapter.MovieViewHolder>(COMPARATOR) {
+class MovieAdapter : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMPARATOR) {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var binding: MovieItemBinding
@@ -20,7 +20,7 @@ class MovieAdapter: PagingDataAdapter<CachedMovie, MovieAdapter.MovieViewHolder>
             this.binding = binding
         }
 
-        fun bind(item: CachedMovie){
+        fun bind(item: Movie) {
             binding.imgFavorite
             Glide.with(binding.root.context)
                 .load(MOVIE_PATH.plus(item.posterPath))
@@ -35,14 +35,14 @@ class MovieAdapter: PagingDataAdapter<CachedMovie, MovieAdapter.MovieViewHolder>
         return MovieViewHolder(binding)
     }
 
-    companion object{
+    companion object {
         private val COMPARATOR = object :
-            DiffUtil.ItemCallback<CachedMovie>() {
-            override fun areItemsTheSame(oldItem: CachedMovie, newItem: CachedMovie): Boolean {
+            DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: CachedMovie, newItem: CachedMovie): Boolean {
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
                 return oldItem == newItem
             }
 

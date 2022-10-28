@@ -12,5 +12,5 @@ interface TheMovieDbApi {
     suspend fun getPopularMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int
-    ): ApiMoviesList?
+    ): ApiMoviesList
 }
