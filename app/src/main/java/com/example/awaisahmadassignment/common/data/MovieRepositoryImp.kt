@@ -4,6 +4,7 @@ import androidx.paging.*
 import com.example.awaisahmadassignment.common.data.api.TheMovieDbApi
 import com.example.awaisahmadassignment.common.data.cache.MovieDatabase
 import com.example.awaisahmadassignment.common.data.cache.model.CachedMovie
+import com.example.awaisahmadassignment.common.data.cache.model.CachedMovie.Companion.toDomain
 import com.example.awaisahmadassignment.common.domain.model.Movie
 import com.example.awaisahmadassignment.common.domain.repositories.MovieRepository
 import com.example.awaisahmadassignment.common.pagging.MovieRemoteMediator
@@ -26,6 +27,7 @@ class MovieRepositoryImp(
                     posterPath = cachedMovie.posterPath,
                     releaseDate = cachedMovie.releaseDate,
                     title = cachedMovie.title,
+                    overView = cachedMovie.overView,
                     isFavorite = cachedMovie.isFavorite
                 )
             }
@@ -34,12 +36,17 @@ class MovieRepositoryImp(
     override fun getFavoriteMovies(): Flow<List<Movie>> = flow {
         val cachedMovies = movieDB.movieDao().getFavoriteMovie(true)
         cachedMovies.collect {
-            emit(it.map { CachedMovie.toDomain(it) })
+            emit(it.map { toDomain(it) })
         }
     }
 
     override fun updateMovie(movieId: Int, isFavorite: Boolean) {
-        movieDB.movieDao().updateMovie(movieId,isFavorite)
+        movieDB.movieDao().updateMovie(movieId, isFavorite)
     }
+
+    override fun getMovieById(movieId: Int): Flow<Movie> =
+        movieDB.movieDao().getMovieById(movieId).map {
+            toDomain(it)
+        }
 
 }

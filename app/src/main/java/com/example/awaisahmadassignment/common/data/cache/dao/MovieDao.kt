@@ -27,4 +27,7 @@ interface MovieDao {
 
     @Query("UPDATE Movie SET isFavorite=:isFavorite where id=:id")
     fun updateMovie(id: Int, isFavorite: Boolean)
+
+    @Query("SELECT * FROM Movie WHERE id=:id")
+    fun getMovieById(id: Int):Flow<CachedMovie>
 }

@@ -11,6 +11,7 @@ data class CachedMovie(
     val posterPath: String,
     val releaseDate: String,
     val title: String,
+    val overView:String,
     val isFavorite:Boolean
 ){
     companion object{
@@ -20,6 +21,7 @@ data class CachedMovie(
                 posterPath = cachedMovie.posterPath,
                 releaseDate = cachedMovie.releaseDate,
                 title = cachedMovie.title,
+                overView = cachedMovie.overView,
                 isFavorite = cachedMovie.isFavorite
             )
         }

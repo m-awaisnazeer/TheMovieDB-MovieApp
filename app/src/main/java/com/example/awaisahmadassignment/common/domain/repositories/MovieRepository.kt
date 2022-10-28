@@ -8,4 +8,5 @@ interface MovieRepository {
     fun getMovies(): Flow<PagingData<Movie>>
     fun getFavoriteMovies():Flow<List<Movie>>
     fun updateMovie(movieId: Int,isFavorite:Boolean)
+    fun getMovieById(movieId: Int):Flow<Movie>
 }

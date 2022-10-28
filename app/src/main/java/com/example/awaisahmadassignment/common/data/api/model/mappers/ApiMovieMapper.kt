@@ -5,9 +5,10 @@ import com.example.awaisahmadassignment.common.data.cache.model.CachedMovie
 
 fun ApiMovie.toCachedMovie(): CachedMovie {
     return CachedMovie(
-        posterPath = poster_path.orEmpty(),
-        releaseDate = release_date.orEmpty(),
+        posterPath = posterPath.orEmpty(),
+        releaseDate = releaseDate.orEmpty(),
         title = title.orEmpty(),
+        overView = overview.orEmpty(),
         isFavorite = false
     )
 }

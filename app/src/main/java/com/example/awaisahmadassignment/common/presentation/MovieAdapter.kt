@@ -1,8 +1,10 @@
 package com.example.awaisahmadassignment.common.presentation
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +25,6 @@ class MovieAdapter(private val updateMovie: (Int, Boolean) -> Unit) :
         }
 
         fun bind(item: Movie) {
-            binding.imgFavorite
             Glide.with(binding.root.context).load(MOVIE_PATH.plus(item.posterPath))
                 .into(binding.imgPoster)
             binding.txtRelease.text = item.releaseDate
@@ -36,6 +37,12 @@ class MovieAdapter(private val updateMovie: (Int, Boolean) -> Unit) :
                 binding.imgFavorite.setBackgroundResource(R.drawable.ic_favorite_24)
             }else{
                 binding.imgFavorite.setBackgroundResource(R.drawable.ic_favorite_border_24)
+            }
+
+            binding.root.setOnClickListener {
+                val movieDetail = Bundle()
+                movieDetail.putInt("movieId",item.id)
+                it.findNavController().navigate(R.id.action_navigation_home_to_movieDetailFragment,movieDetail)
             }
         }
     }

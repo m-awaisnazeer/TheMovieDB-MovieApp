@@ -37,6 +37,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 val repository = MovieRepositoryImp(
@@ -51,7 +53,6 @@ class HomeFragment : Fragment() {
             }
         }
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
