@@ -1,4 +1,4 @@
-package com.example.awaisahmadassignment.home
+package com.example.awaisahmadassignment.home.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,10 @@ import com.example.awaisahmadassignment.common.data.cache.MovieDatabase
 import com.example.awaisahmadassignment.common.pagging.LoaderAdapter
 import com.example.awaisahmadassignment.common.presentation.MovieAdapter
 import com.example.awaisahmadassignment.common.utils.Constants
+import com.example.awaisahmadassignment.common.utils.DefaultDispatcher
 import com.example.awaisahmadassignment.databinding.FragmentHomeBinding
+import com.example.awaisahmadassignment.home.domain.FavoriteMoviesUseCase
+import com.example.awaisahmadassignment.home.domain.GetAllMovies
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -36,9 +39,15 @@ class HomeFragment : Fragment() {
     ): View {
         val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                val repository =
-                    MovieRepositoryImp(getMovieApi(), getMovieDatabase(requireContext()))
-                return HomeViewModel(repository) as T
+                val repository = MovieRepositoryImp(
+                    getMovieApi(requireContext()),
+                    getMovieDatabase(requireContext())
+                )
+                return HomeViewModel(
+                    DefaultDispatcher(),
+                    GetAllMovies(repository),
+                    FavoriteMoviesUseCase(repository)
+                ) as T
             }
         }
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
@@ -49,7 +58,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.moviesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        val adapter = MovieAdapter()
+        val adapter = MovieAdapter(::addToFavorites)
         binding.moviesRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoaderAdapter(),
             footer = LoaderAdapter()
@@ -64,31 +73,37 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun addToFavorites(id: Int, isFavorite: Boolean) {
+        viewModel.addToFavorites(id, isFavorite)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    fun getMovieApi(): TheMovieDbApi {
-        val client = OkHttpClient.Builder()
-            .addInterceptor(
-                ChuckerInterceptor.Builder(requireContext())
-                    .collector(ChuckerCollector(requireContext()))
-                    .maxContentLength(250000L)
-                    .redactHeaders(emptySet())
-                    .alwaysReadResponseBody(true)
-                    .build()
-            )
-            .build()
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .baseUrl(Constants.BASE_URL)
-            .build().create(TheMovieDbApi::class.java)
-    }
+    companion object {
+        fun getMovieApi(context: Context): TheMovieDbApi {
+            val client = OkHttpClient.Builder()
+                .addInterceptor(
+                    ChuckerInterceptor.Builder(context)
+                        .collector(ChuckerCollector(context))
+                        .maxContentLength(250000L)
+                        .redactHeaders(emptySet())
+                        .alwaysReadResponseBody(true)
+                        .build()
+                )
+                .build()
+            return Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .baseUrl(Constants.BASE_URL)
+                .build().create(TheMovieDbApi::class.java)
+        }
 
-    fun getMovieDatabase(context: Context): MovieDatabase {
-        return Room.databaseBuilder(context, MovieDatabase::class.java, "movieDb")
-            .build()
+        fun getMovieDatabase(context: Context): MovieDatabase {
+            return Room.databaseBuilder(context, MovieDatabase::class.java, "movieDb")
+                .build()
+        }
     }
 }
