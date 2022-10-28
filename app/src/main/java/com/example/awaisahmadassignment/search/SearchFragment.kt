@@ -1,4 +1,4 @@
-package com.example.awaisahmadassignment.ui.search
+package com.example.awaisahmadassignment.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
