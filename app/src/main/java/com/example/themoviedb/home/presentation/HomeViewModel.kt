@@ -11,16 +11,24 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    val dispatcher: DispatcherProvider,
+    private val dispatcher: DispatcherProvider,
     getAllMovies: GetAllMovies,
     val favoriteMovies: FavoriteMoviesUseCase
 ) :
     ViewModel() {
     val list: Flow<PagingData<Movie>> = getAllMovies()
 
-    fun addToFavorites(id: Int, isFavorite: Boolean) {
+    private fun addToFavorites(movie: Movie) {
         viewModelScope.launch(dispatcher.IO) {
-            favoriteMovies(id, isFavorite)
+            favoriteMovies(movie)
+        }
+    }
+
+    fun handleEvents(event: HomeMoviesEvent){
+        when(event){
+            is HomeMoviesEvent.AddToFavorites -> {
+                addToFavorites(event.movie)
+            }
         }
     }
 }

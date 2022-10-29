@@ -7,14 +7,13 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.themoviedb.R
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.Constants.MOVIE_PATH
 import com.example.themoviedb.databinding.MovieItemBinding
 import kotlin.reflect.KFunction1
 
 class MovieAdapter(
-    private val updateMovie: (Int, Boolean) -> Unit,
+    private val updateMovie: KFunction1<Movie, Unit>,
     private val onMovieClick: KFunction1<Movie, Unit>
 ) :
     PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMPARATOR) {
@@ -26,23 +25,18 @@ class MovieAdapter(
             this.binding = binding
         }
 
-        fun bind(item: Movie) {
-            Glide.with(binding.root.context).load(MOVIE_PATH.plus(item.posterPath))
+        fun bind(movie: Movie) {
+            Glide.with(binding.root.context).load(MOVIE_PATH.plus(movie.posterPath))
                 .into(binding.imgPoster)
-            binding.txtRelease.text = item.releaseDate
-            binding.txtMovieName.text = item.title
+            binding.txtRelease.text = movie.releaseDate
+            binding.txtMovieName.text = movie.title
             binding.imgFavorite.setOnClickListener {
-                updateMovie(item.id, !item.isFavorite)
+                updateMovie(movie.copy(isFavorite = !movie.isFavorite))
             }
-
-            if (item.isFavorite){
-                binding.imgFavorite.setBackgroundResource(R.drawable.ic_favorite_24)
-            }else{
-                binding.imgFavorite.setBackgroundResource(R.drawable.ic_favorite_border_24)
-            }
+            binding.imgFavorite.isChecked = movie.isFavorite
 
             binding.root.setOnClickListener {
-                onMovieClick(item)
+                onMovieClick(movie)
             }
         }
     }

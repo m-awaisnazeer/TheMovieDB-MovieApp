@@ -14,7 +14,7 @@ import kotlin.reflect.KFunction1
 class FavoriteMoviesAdapter(
     private val movies: List<Movie>,
     private val onMovieClick: KFunction1<Movie, Unit>,
-    private val updateMovie: (Int, Boolean) -> Unit
+    private val updateMovie: (Movie) -> Unit
 ) : RecyclerView.Adapter<FavoriteMoviesAdapter.FavoriteMovieViewHolder>() {
 
     inner class FavoriteMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,6 +25,7 @@ class FavoriteMoviesAdapter(
         }
 
         fun bind(movie: Movie) {
+            binding.imgFavorite.isChecked = movie.isFavorite
             binding.txtFavoriteMovieName.text = movie.title
             binding.txtFavoriteMovieRelease.text = movie.releaseDate
             Glide.with(binding.root.context)
@@ -32,7 +33,7 @@ class FavoriteMoviesAdapter(
                 .into(binding.imgFavoritePoster)
 
             binding.imgFavorite.setOnClickListener {
-                updateMovie(movie.id,!movie.isFavorite)
+                updateMovie(movie.copy(isFavorite = !movie.isFavorite))
             }
 
             binding.root.setOnClickListener {
@@ -42,8 +43,7 @@ class FavoriteMoviesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMovieViewHolder {
-        val binding =
-            FavoriteMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = FavoriteMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteMovieViewHolder(binding)
     }
 

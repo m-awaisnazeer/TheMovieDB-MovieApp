@@ -58,12 +58,12 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onMovieClick(movie:Movie){
-        val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie.id,movie)
+        val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie)
         findNavController().navigate(action)
     }
 
-    private fun addToFavorites(id: Int, isFavorite: Boolean) {
-        favoritesViewModel.addToFavorites(id, isFavorite)
+    private fun addToFavorites(movie: Movie) {
+        favoritesViewModel.handleEvents(FavoritesMovieEvent.AddToFavorites(movie))
     }
 
     override fun onDestroyView() {

@@ -74,7 +74,6 @@ class MovieRemoteMediator(
                     remoteKeysDao.addAllRemoteKeys(keys)
                     MediatorResult.Success(endOfPaginationReached)
                 }
-
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }

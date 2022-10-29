@@ -64,15 +64,15 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_movie_name" />
 
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/btn_favorite"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_margin="12dp"
                 android:contentDescription="@string/app_name"
+                android:button="@drawable/favorite_selector_56"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_movie_banner"
-                app:srcCompat="@drawable/ic_favorite_border_24" />
+                app:layout_constraintTop_toBottomOf="@id/img_movie_banner" />
 
             <TextView
                 android:id="@+id/txt_movie_over_view"

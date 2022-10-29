@@ -68,15 +68,15 @@
         app:layout_constraintStart_toStartOf="@id/txt_release"
         app:layout_constraintTop_toBottomOf="@id/txt_release" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/img_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:elevation="10dp"
-        android:src="@drawable/ic_favorite_border_24"
         app:layout_constraintBottom_toBottomOf="@id/txt_release"
         app:layout_constraintEnd_toEndOf="parent"
+        android:button="@drawable/favorite_selector"
         app:layout_constraintTop_toBottomOf="@id/card_poster"
         app:layout_constraintTop_toTopOf="@id/txt_movie_name" />
 

@@ -24,5 +24,11 @@
         <item name="cornerSize">24dp</item>
     </style>
 
+    <style name="txt_movie_name" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="maxLines">1</item>
+        <item name="android:textColor">?android:colorPrimary</item>
+    </style>
 
 </resources>

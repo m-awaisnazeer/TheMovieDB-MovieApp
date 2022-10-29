@@ -4,28 +4,33 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.DispatcherProvider
-import com.example.themoviedb.moviedetail.domain.GetMovie
+import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel(
     private val dispatcherProvider: DispatcherProvider,
-    private val getMovie: GetMovie
+    private val favoriteMoviesUseCase: FavoriteMoviesUseCase
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MovieUIState> = MutableStateFlow(MovieUIState.Loading)
     val state: StateFlow<MovieUIState> = _state
 
-    fun getMovieById(movieId: Int) {
+    private fun addToFavorites(movie:Movie) {
         viewModelScope.launch(dispatcherProvider.IO) {
-            getMovie(movieId).collect {
-                _state.value = MovieUIState.Success(it)
-            }
+            favoriteMoviesUseCase(movie)
         }
     }
 
-    fun setCurrentMovie(movie: Movie){
-        _state.value = MovieUIState.Success(movie)
+    fun handleEvent(event: MovieDetailsEvent) {
+        when (event) {
+            is MovieDetailsEvent.AddToFavorites -> {
+                addToFavorites(event.movie)
+            }
+            is MovieDetailsEvent.LoadMovie -> {
+                _state.value = MovieUIState.MovieDetails(event.movie)
+            }
+        }
     }
 }

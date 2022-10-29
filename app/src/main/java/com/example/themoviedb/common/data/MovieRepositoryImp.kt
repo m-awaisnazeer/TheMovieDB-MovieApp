@@ -4,6 +4,7 @@ import androidx.paging.*
 import com.example.themoviedb.common.data.api.TheMovieDbApi
 import com.example.themoviedb.common.data.api.model.mappers.toDomainMovie
 import com.example.themoviedb.common.data.cache.MovieDatabase
+import com.example.themoviedb.common.data.cache.model.CachedMovie
 import com.example.themoviedb.common.data.cache.model.CachedMovie.Companion.toDomain
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.domain.repositories.MovieRepository
@@ -43,8 +44,21 @@ class MovieRepositoryImp(
         }
     }
 
-    override fun updateMovie(movieId: Int, isFavorite: Boolean) {
-        movieDB.movieDao().updateMovie(movieId, isFavorite)
+    override suspend fun updateMovie(movie: Movie) {
+        movie.apply {
+            val update: Int = movieDB.movieDao().updateMovie(id, isFavorite)
+            if (update == -1) {
+                movieDB.movieDao().insert(
+                    CachedMovie(
+                        posterPath = posterPath,
+                        releaseDate = releaseDate,
+                        title = title,
+                        overView = overView,
+                        isFavorite = isFavorite
+                    )
+                )
+            }
+        }
     }
 
     override fun getMovieById(movieId: Int): Flow<Movie> =

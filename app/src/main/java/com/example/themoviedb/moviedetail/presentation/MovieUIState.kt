@@ -4,5 +4,5 @@ import com.example.themoviedb.common.domain.model.Movie
 
 sealed class MovieUIState {
     object Loading : MovieUIState()
-    data class Success(val movie: Movie) : MovieUIState()
+    data class MovieDetails(val movie: Movie) : MovieUIState()
 }

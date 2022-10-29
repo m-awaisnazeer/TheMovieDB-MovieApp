@@ -17,6 +17,7 @@ import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.DefaultDispatcher
 import com.example.themoviedb.databinding.FragmentSearchBinding
 import com.example.themoviedb.favorites.presentation.FavoriteMoviesAdapter
+import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.home.presentation.HomeFragment
 import com.example.themoviedb.search.domain.SearchMovies
 import kotlinx.coroutines.launch
@@ -45,6 +46,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
                 return SearchViewModel(
                     DefaultDispatcher(),
                     SearchMovies(repository),
+                    FavoriteMoviesUseCase(repository)
                 ) as T
             }
         }
@@ -66,14 +68,14 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
 
     override fun onQueryTextChange(newText: String?): Boolean {
         newText?.let {
-            searchViewModel.handleEvents(SearchEvent.QueryInput(newText))
+            searchViewModel.handleEvents(SearchMovieEvent.QueryInput(newText))
         }
         return false
     }
 
     override fun onClose(): Boolean {
         binding.searchViewMovie.clearFocus()
-        searchViewModel.handleEvents(SearchEvent.OnTextCleared)
+        searchViewModel.handleEvents(SearchMovieEvent.OnTextCleared)
         return true
     }
 
@@ -97,8 +99,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
                         is SearchMovieUiState.Success -> {
                             binding.searchProgressBar.isVisible = false
                             binding.favoriteMovies.isVisible = true
-                            binding.favoriteMovies.adapter =
-                                FavoriteMoviesAdapter(it.data, ::onMovieClick, ::addToFavorites)
+                            binding.favoriteMovies.adapter = FavoriteMoviesAdapter(it.data, ::onMovieClick, ::addToFavorites)
                         }
                         SearchMovieUiState.Initial -> {
                             setUpInitialState()
@@ -109,13 +110,12 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
         }
     }
 
-    private fun addToFavorites(id: Int, isFavorite: Boolean) {
-        //\favoritesViewModel.addToFavorites(id, isFavorite)
+    private fun addToFavorites(movie: Movie) {
+        searchViewModel.handleEvents(SearchMovieEvent.AddToFavorites(movie))
     }
 
     private fun onMovieClick(movie: Movie) {
-        val action =
-            SearchFragmentDirections.actionNavigationSearchToMovieDetailFragment(movie.id, movie)
+        val action = SearchFragmentDirections.actionNavigationSearchToMovieDetailFragment(movie)
         findNavController().navigate(action)
     }
 
@@ -124,7 +124,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
         binding.initialSearchImageView.isVisible = true
         binding.searchProgressBar.isVisible = false
         binding.favoriteMovies.isVisible = false
-        binding.initialSearchImageView.setImageResource(R.drawable.the_movie_db)
+        binding.initialSearchImageView.setImageResource(R.drawable.ic_search_24)
         binding.initialSearchText.text = requireContext().getText(R.string.initial_search_text_label)
     }
 

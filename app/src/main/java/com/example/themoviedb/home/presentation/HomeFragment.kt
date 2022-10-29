@@ -76,12 +76,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun addToFavorites(id: Int, isFavorite: Boolean) {
-        viewModel.addToFavorites(id, isFavorite)
+    private fun addToFavorites(movie: Movie) {
+        viewModel.handleEvents(HomeMoviesEvent.AddToFavorites(movie))
     }
 
     private fun onMovieClick(movie: Movie){
-        val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailFragment(movie.id,movie)
+        val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailFragment(movie)
         findNavController().navigate(action)
     }
 

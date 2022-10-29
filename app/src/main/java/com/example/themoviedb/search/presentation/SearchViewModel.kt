@@ -2,15 +2,19 @@ package com.example.themoviedb.search.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.DispatcherProvider
 import com.example.themoviedb.common.utils.Resource
+import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.search.domain.SearchMovies
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val dispatcherProvider: DispatcherProvider, private val searchMovies: SearchMovies
+    private val dispatcherProvider: DispatcherProvider,
+    private val searchMovies: SearchMovies,
+    private val favoriteMoviesUseCase: FavoriteMoviesUseCase
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<SearchMovieUiState> =
@@ -41,14 +45,23 @@ class SearchViewModel(
         }
     }
 
-    fun handleEvents(event: SearchEvent) {
-        when(event) {
-            SearchEvent.OnTextCleared -> {
+    fun handleEvents(event: SearchMovieEvent) {
+        when (event) {
+            SearchMovieEvent.OnTextCleared -> {
                 _state.value = SearchMovieUiState.Initial
             }
-            is SearchEvent.QueryInput -> {
+            is SearchMovieEvent.QueryInput -> {
                 updateQuery(event.input)
             }
+            is SearchMovieEvent.AddToFavorites -> {
+                addToFavorites(event.movie)
+            }
+        }
+    }
+
+    fun addToFavorites(movie: Movie) {
+        viewModelScope.launch(dispatcherProvider.IO) {
+            favoriteMoviesUseCase(movie)
         }
     }
 }

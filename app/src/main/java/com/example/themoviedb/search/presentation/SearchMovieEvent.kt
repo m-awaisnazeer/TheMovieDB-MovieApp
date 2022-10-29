@@ -34,7 +34,10 @@
 
 package com.example.themoviedb.search.presentation
 
-sealed class SearchEvent {
-    data class QueryInput(val input: String) : SearchEvent()
-    object OnTextCleared : SearchEvent()
+import com.example.themoviedb.common.domain.model.Movie
+
+sealed class SearchMovieEvent {
+    data class QueryInput(val input: String) : SearchMovieEvent()
+    object OnTextCleared : SearchMovieEvent()
+    data class AddToFavorites(val movie: Movie) : SearchMovieEvent()
 }

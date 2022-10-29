@@ -46,7 +46,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
-        android:src="@drawable/the_movie_db"
+        android:src="@drawable/ic_search_24"
         app:layout_constraintBottom_toTopOf="@id/initial_search_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

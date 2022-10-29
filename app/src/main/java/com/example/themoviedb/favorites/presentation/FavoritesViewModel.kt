@@ -2,6 +2,7 @@ package com.example.themoviedb.favorites.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.DispatcherProvider
 import com.example.themoviedb.favorites.domain.GetFavoriteMovies
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
@@ -15,9 +16,17 @@ class FavoritesViewModel(
 
     val favoriteMovies = getFavoriteMovies()
 
-    fun addToFavorites(movieId: Int, isFavorite: Boolean) {
+    private fun addToFavorites(movie: Movie) {
         viewModelScope.launch(dispatcher.IO) {
-            favoriteMoviesUseCase(movieId, isFavorite)
+            favoriteMoviesUseCase(movie)
+        }
+    }
+
+    fun handleEvents(event: FavoritesMovieEvent){
+        when(event){
+            is FavoritesMovieEvent.AddToFavorites -> {
+                addToFavorites(event.movie)
+            }
         }
     }
 }
