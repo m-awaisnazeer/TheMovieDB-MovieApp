@@ -3,6 +3,7 @@ package com.example.themoviedb.common.data.api
 import com.example.themoviedb.common.data.api.model.ApiMoviesList
 import com.example.themoviedb.common.utils.Constants.API_KEY
 import com.example.themoviedb.common.utils.Constants.MOVIES_LIST_END_URL
+import com.example.themoviedb.common.utils.Constants.SEARCH_MOVIES_END_URL
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,4 +14,11 @@ interface TheMovieDbApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int
     ): ApiMoviesList
+
+    @GET(SEARCH_MOVIES_END_URL)
+    suspend fun searchMovies(
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("query") query:String,
+        @Query("page") page: Int
+    ): ApiMoviesList?
 }

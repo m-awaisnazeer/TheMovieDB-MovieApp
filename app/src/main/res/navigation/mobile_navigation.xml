@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.themoviedb.search.SearchFragment"
+        android:name="com.example.themoviedb.search.presentation.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -43,5 +43,10 @@
             android:name="movieId"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="movie"
+            app:argType="com.example.themoviedb.common.domain.model.Movie"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

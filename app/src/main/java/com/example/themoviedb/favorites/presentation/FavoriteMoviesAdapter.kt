@@ -1,20 +1,19 @@
 package com.example.themoviedb.favorites.presentation
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.themoviedb.R
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.Constants
 import com.example.themoviedb.databinding.FavoriteMovieItemBinding
+import kotlin.reflect.KFunction1
 
 
 class FavoriteMoviesAdapter(
     private val movies: List<Movie>,
+    private val onMovieClick: KFunction1<Movie, Unit>,
     private val updateMovie: (Int, Boolean) -> Unit
 ) : RecyclerView.Adapter<FavoriteMoviesAdapter.FavoriteMovieViewHolder>() {
 
@@ -37,9 +36,7 @@ class FavoriteMoviesAdapter(
             }
 
             binding.root.setOnClickListener {
-                val movieDetail = Bundle()
-                movieDetail.putInt("movieId",movie.id)
-                it.findNavController().navigate(R.id.action_navigation_favorites_to_movieDetailFragment,movieDetail)
+                onMovieClick(movie)
             }
         }
     }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerCollector
@@ -14,6 +15,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.themoviedb.common.data.MovieRepositoryImp
 import com.example.themoviedb.common.data.api.TheMovieDbApi
 import com.example.themoviedb.common.data.cache.MovieDatabase
+import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.pagging.LoaderAdapter
 import com.example.themoviedb.common.presentation.MovieAdapter
 import com.example.themoviedb.common.utils.Constants
@@ -59,7 +61,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.moviesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        val adapter = MovieAdapter(::addToFavorites)
+        val adapter = MovieAdapter(::addToFavorites,::onMovieClick)
         binding.moviesRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoaderAdapter(),
             footer = LoaderAdapter()
@@ -76,6 +78,11 @@ class HomeFragment : Fragment() {
 
     private fun addToFavorites(id: Int, isFavorite: Boolean) {
         viewModel.addToFavorites(id, isFavorite)
+    }
+
+    private fun onMovieClick(movie: Movie){
+        val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailFragment(movie.id,movie)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

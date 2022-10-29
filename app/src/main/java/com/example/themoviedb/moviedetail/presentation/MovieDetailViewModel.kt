@@ -2,6 +2,7 @@ package com.example.themoviedb.moviedetail.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.DispatcherProvider
 import com.example.themoviedb.moviedetail.domain.GetMovie
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,5 +23,9 @@ class MovieDetailViewModel(
                 _state.value = MovieUIState.Success(it)
             }
         }
+    }
+
+    fun setCurrentMovie(movie: Movie){
+        _state.value = MovieUIState.Success(movie)
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.themoviedb.common.data.MovieRepositoryImp
 import com.example.themoviedb.common.utils.Constants
@@ -20,6 +21,8 @@ class MovieDetailFragment : Fragment() {
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: MovieDetailViewModel
+
+    val args: MovieDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,7 +41,13 @@ class MovieDetailFragment : Fragment() {
             }
         }
         viewModel = ViewModelProvider(this, factory)[MovieDetailViewModel::class.java]
-        viewModel.getMovieById(arguments?.getInt("movieId") ?: -1)
+
+        val movie = args.movie
+        movie?.let {
+            viewModel.setCurrentMovie(it)
+        } ?: kotlin.run {
+            viewModel.getMovieById(args.movieId)
+        }
         return binding.root
     }
 

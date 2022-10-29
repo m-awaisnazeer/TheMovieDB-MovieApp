@@ -1,10 +1,8 @@
 package com.example.themoviedb.common.presentation
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +11,12 @@ import com.example.themoviedb.R
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.Constants.MOVIE_PATH
 import com.example.themoviedb.databinding.MovieItemBinding
+import kotlin.reflect.KFunction1
 
-class MovieAdapter(private val updateMovie: (Int, Boolean) -> Unit) :
+class MovieAdapter(
+    private val updateMovie: (Int, Boolean) -> Unit,
+    private val onMovieClick: KFunction1<Movie, Unit>
+) :
     PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMPARATOR) {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,9 +42,7 @@ class MovieAdapter(private val updateMovie: (Int, Boolean) -> Unit) :
             }
 
             binding.root.setOnClickListener {
-                val movieDetail = Bundle()
-                movieDetail.putInt("movieId",item.id)
-                it.findNavController().navigate(R.id.action_navigation_home_to_movieDetailFragment,movieDetail)
+                onMovieClick(item)
             }
         }
     }

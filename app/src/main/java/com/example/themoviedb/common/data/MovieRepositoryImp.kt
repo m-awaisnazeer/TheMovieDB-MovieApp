@@ -2,14 +2,18 @@ package com.example.themoviedb.common.data
 
 import androidx.paging.*
 import com.example.themoviedb.common.data.api.TheMovieDbApi
+import com.example.themoviedb.common.data.api.model.mappers.toDomainMovie
 import com.example.themoviedb.common.data.cache.MovieDatabase
 import com.example.themoviedb.common.data.cache.model.CachedMovie.Companion.toDomain
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.domain.repositories.MovieRepository
 import com.example.themoviedb.common.pagging.MovieRemoteMediator
+import com.example.themoviedb.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import retrofit2.HttpException
+import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
 class MovieRepositoryImp(
@@ -47,5 +51,19 @@ class MovieRepositoryImp(
         movieDB.movieDao().getMovieById(movieId).map {
             toDomain(it)
         }
+
+    override fun searchMovie(query: String): Flow<Resource<List<Movie>>> = flow {
+        try {
+            val response = api.searchMovies(query = query, page = 1)
+            response?.apiMovies?.let {
+                val movies: List<Movie> = it.map { it.toDomainMovie() }
+                emit(Resource.Success(movies))
+            }
+        } catch (e: HttpException) {
+            emit(Resource.Error(null, e.message()))
+        } catch (e: IOException) {
+            emit(Resource.Error(null, e.message ?: "Network connection Error"))
+        }
+    }
 
 }

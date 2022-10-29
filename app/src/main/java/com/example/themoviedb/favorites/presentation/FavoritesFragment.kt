@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.common.data.MovieRepositoryImp
+import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.DefaultDispatcher
 import com.example.themoviedb.databinding.FragmentFavoritesBinding
 import com.example.themoviedb.favorites.domain.GetFavoriteMovies
@@ -49,10 +51,15 @@ class FavoritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 favoritesViewModel.favoriteMovies.collect {
-                    binding.favoriteMovies.adapter = FavoriteMoviesAdapter(it, ::addToFavorites)
+                    binding.favoriteMovies.adapter = FavoriteMoviesAdapter(it,::onMovieClick, ::addToFavorites)
                 }
             }
         }
+    }
+
+    private fun onMovieClick(movie:Movie){
+        val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie.id,movie)
+        findNavController().navigate(action)
     }
 
     private fun addToFavorites(id: Int, isFavorite: Boolean) {
