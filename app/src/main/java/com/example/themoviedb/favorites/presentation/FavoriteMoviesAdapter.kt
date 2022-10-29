@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.awaisahmadassignment.R
-import com.example.awaisahmadassignment.databinding.FavoriteMovieItemBinding
+import com.example.themoviedb.R
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.Constants
+import com.example.themoviedb.databinding.FavoriteMovieItemBinding
 
 
 class FavoriteMoviesAdapter(

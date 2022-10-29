@@ -9,10 +9,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.awaisahmadassignment.R
-import com.example.awaisahmadassignment.databinding.MovieItemBinding
+import com.example.themoviedb.R
 import com.example.themoviedb.common.domain.model.Movie
 import com.example.themoviedb.common.utils.Constants.MOVIE_PATH
+import com.example.themoviedb.databinding.MovieItemBinding
 
 class MovieAdapter(private val updateMovie: (Int, Boolean) -> Unit) :
     PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMPARATOR) {

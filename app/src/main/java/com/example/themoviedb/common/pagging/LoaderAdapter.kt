@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.awaisahmadassignment.databinding.LoaderItemBinding
+import com.example.themoviedb.databinding.LoaderItemBinding
 
 class LoaderAdapter : LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
 

@@ -8,10 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
-import com.example.awaisahmadassignment.databinding.FragmentMovieDetailBinding
 import com.example.themoviedb.common.data.MovieRepositoryImp
 import com.example.themoviedb.common.utils.Constants
 import com.example.themoviedb.common.utils.DefaultDispatcher
+import com.example.themoviedb.databinding.FragmentMovieDetailBinding
 import com.example.themoviedb.home.presentation.HomeFragment
 import com.example.themoviedb.moviedetail.domain.GetMovie
 import kotlinx.coroutines.launch

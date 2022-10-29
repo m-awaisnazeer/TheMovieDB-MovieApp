@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.awaisahmadassignment.databinding.FragmentFavoritesBinding
 import com.example.themoviedb.common.data.MovieRepositoryImp
 import com.example.themoviedb.common.utils.DefaultDispatcher
+import com.example.themoviedb.databinding.FragmentFavoritesBinding
 import com.example.themoviedb.favorites.domain.GetFavoriteMovies
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.home.presentation.HomeFragment

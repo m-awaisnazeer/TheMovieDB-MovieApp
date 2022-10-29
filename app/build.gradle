@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.awaisahmadassignment'
+    namespace 'com.example.themoviedb'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.awaisahmadassignment"
+        applicationId "com.example.themoviedb"
         minSdk 21
         targetSdk 33
         versionCode 1

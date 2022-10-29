@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.awaisahmadassignment.databinding.FragmentHomeBinding
 import com.example.themoviedb.common.data.MovieRepositoryImp
 import com.example.themoviedb.common.data.api.TheMovieDbApi
 import com.example.themoviedb.common.data.cache.MovieDatabase
@@ -19,6 +18,7 @@ import com.example.themoviedb.common.pagging.LoaderAdapter
 import com.example.themoviedb.common.presentation.MovieAdapter
 import com.example.themoviedb.common.utils.Constants
 import com.example.themoviedb.common.utils.DefaultDispatcher
+import com.example.themoviedb.databinding.FragmentHomeBinding
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.home.domain.GetAllMovies
 import kotlinx.coroutines.launch
