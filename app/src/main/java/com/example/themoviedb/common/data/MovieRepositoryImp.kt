@@ -6,7 +6,7 @@ import com.example.themoviedb.common.data.api.model.mappers.toDomainMovie
 import com.example.themoviedb.common.data.cache.MovieDatabase
 import com.example.themoviedb.common.data.cache.model.CachedMovie
 import com.example.themoviedb.common.data.cache.model.CachedMovie.Companion.toDomain
-import com.example.themoviedb.common.domain.model.Movie
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.common.domain.repositories.MovieRepository
 import com.example.themoviedb.common.pagging.MovieRemoteMediator
 import com.example.themoviedb.common.utils.Resource
@@ -15,16 +15,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class MovieRepositoryImp(
-    private val api: TheMovieDbApi, private val movieDB: MovieDatabase
+class MovieRepositoryImp @Inject constructor(
+    val api: TheMovieDbApi,
+    private val movieDatabase: MovieDatabase
 ) : MovieRepository {
 
     override fun getMovies(): Flow<PagingData<Movie>> =
         Pager(config = PagingConfig(pageSize = 20, maxSize = 100),
-            remoteMediator = MovieRemoteMediator(api, movieDB),
-            pagingSourceFactory = { movieDB.movieDao().getMovies() }).flow.map {
+            remoteMediator = MovieRemoteMediator(api, movieDatabase),
+            pagingSourceFactory = { movieDatabase.movieDao().getMovies() }).flow.map {
             it.map { cachedMovie ->
                 Movie(
                     id = cachedMovie.id,
@@ -38,7 +40,7 @@ class MovieRepositoryImp(
         }
 
     override fun getFavoriteMovies(): Flow<List<Movie>> = flow {
-        val cachedMovies = movieDB.movieDao().getFavoriteMovies(true)
+        val cachedMovies = movieDatabase.movieDao().getFavoriteMovies(true)
         cachedMovies.collect {
             emit(it.map { toDomain(it) })
         }
@@ -46,9 +48,9 @@ class MovieRepositoryImp(
 
     override suspend fun updateMovie(movie: Movie) {
         movie.apply {
-            val update: Int = movieDB.movieDao().updateMovie(id, isFavorite)
+            val update: Int = movieDatabase.movieDao().updateMovie(id, isFavorite)
             if (update == 0) {
-                movieDB.movieDao().insert(
+                movieDatabase.movieDao().insert(
                     CachedMovie(
                         posterPath = posterPath,
                         releaseDate = releaseDate,
@@ -62,7 +64,7 @@ class MovieRepositoryImp(
     }
 
     override fun getMovieById(movieId: Int): Flow<Movie> =
-        movieDB.movieDao().getMovieById(movieId).map {
+        movieDatabase.movieDao().getMovieById(movieId).map {
             toDomain(it)
         }
 

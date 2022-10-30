@@ -1,7 +1,7 @@
 package com.example.themoviedb.common.domain.repositories
 
 import androidx.paging.PagingData
-import com.example.themoviedb.common.domain.model.Movie
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 

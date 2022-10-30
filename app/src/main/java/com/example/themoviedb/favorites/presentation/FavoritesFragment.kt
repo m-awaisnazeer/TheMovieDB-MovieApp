@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themoviedb.common.data.MovieRepositoryImp
-import com.example.themoviedb.common.domain.model.Movie
-import com.example.themoviedb.common.utils.DefaultDispatcher
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.databinding.FragmentFavoritesBinding
-import com.example.themoviedb.favorites.domain.GetFavoriteMovies
-import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
-import com.example.themoviedb.home.presentation.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-    private lateinit var favoritesViewModel: FavoritesViewModel
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,19 +29,6 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        val factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                val repository = MovieRepositoryImp(
-                    HomeFragment.getMovieApi(requireContext()),
-                    HomeFragment.getMovieDatabase(requireContext())
-                )
-                return FavoritesViewModel(
-                    DefaultDispatcher(), GetFavoriteMovies(repository),
-                    FavoriteMoviesUseCase(repository)
-                ) as T
-            }
-        }
-        favoritesViewModel = ViewModelProvider(this, factory)[FavoritesViewModel::class.java]
         return binding.root
     }
 

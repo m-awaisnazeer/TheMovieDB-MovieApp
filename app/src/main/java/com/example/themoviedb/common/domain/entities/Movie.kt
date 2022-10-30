@@ -1,4 +1,4 @@
-package com.example.themoviedb.common.domain.model
+package com.example.themoviedb.common.domain.entities
 
 import android.os.Parcel
 import android.os.Parcelable

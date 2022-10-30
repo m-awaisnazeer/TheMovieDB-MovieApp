@@ -6,22 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.themoviedb.common.data.MovieRepositoryImp
-import com.example.themoviedb.common.domain.model.Movie
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.common.utils.Constants
-import com.example.themoviedb.common.utils.DefaultDispatcher
 import com.example.themoviedb.databinding.FragmentMovieDetailBinding
-import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
-import com.example.themoviedb.home.presentation.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MovieDetailViewModel
+    private val viewModel: MovieDetailViewModel by viewModels()
 
     private val args: MovieDetailFragmentArgs by navArgs()
     val currentMovie: Movie by lazy {
@@ -32,19 +33,6 @@ class MovieDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
-        val factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                val repository = MovieRepositoryImp(
-                    HomeFragment.getMovieApi(requireContext()),
-                    HomeFragment.getMovieDatabase(requireContext())
-                )
-                return MovieDetailViewModel(
-                    DefaultDispatcher(),
-                    FavoriteMoviesUseCase(repository),
-                ) as T
-            }
-        }
-        viewModel = ViewModelProvider(this, factory)[MovieDetailViewModel::class.java]
         viewModel.handleEvent(MovieDetailsEvent.LoadMovie(currentMovie))
         return binding.root
     }

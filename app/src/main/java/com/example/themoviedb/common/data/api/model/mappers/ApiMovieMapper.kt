@@ -2,7 +2,7 @@ package com.example.themoviedb.common.data.api.model.mappers
 
 import com.example.themoviedb.common.data.api.model.ApiMovie
 import com.example.themoviedb.common.data.cache.model.CachedMovie
-import com.example.themoviedb.common.domain.model.Movie
+import com.example.themoviedb.common.domain.entities.Movie
 
 fun ApiMovie.toCachedMovie(): CachedMovie {
     return CachedMovie(

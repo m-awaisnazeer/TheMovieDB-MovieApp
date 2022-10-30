@@ -7,7 +7,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.themoviedb.common.domain.model.Movie
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.common.utils.Constants.MOVIE_PATH
 import com.example.themoviedb.databinding.MovieItemBinding
 import kotlin.reflect.KFunction1

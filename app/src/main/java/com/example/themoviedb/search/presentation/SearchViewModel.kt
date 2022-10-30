@@ -2,16 +2,19 @@ package com.example.themoviedb.search.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themoviedb.common.domain.model.Movie
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.common.utils.DispatcherProvider
 import com.example.themoviedb.common.utils.Resource
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.search.domain.SearchMovies
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
     private val searchMovies: SearchMovies,
     private val favoriteMoviesUseCase: FavoriteMoviesUseCase

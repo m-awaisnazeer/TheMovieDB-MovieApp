@@ -8,26 +8,27 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.R
-import com.example.themoviedb.common.data.MovieRepositoryImp
-import com.example.themoviedb.common.domain.model.Movie
-import com.example.themoviedb.common.utils.DefaultDispatcher
+import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.databinding.FragmentSearchBinding
 import com.example.themoviedb.favorites.presentation.FavoriteMoviesAdapter
-import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
-import com.example.themoviedb.home.presentation.HomeFragment
-import com.example.themoviedb.search.domain.SearchMovies
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private lateinit var searchViewModel: SearchViewModel
+
+    private val searchViewModel: SearchViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -37,20 +38,6 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                val repository = MovieRepositoryImp(
-                    HomeFragment.getMovieApi(requireContext()),
-                    HomeFragment.getMovieDatabase(requireContext())
-                )
-                return SearchViewModel(
-                    DefaultDispatcher(),
-                    SearchMovies(repository),
-                    FavoriteMoviesUseCase(repository)
-                ) as T
-            }
-        }
-        searchViewModel = ViewModelProvider(this, factory)[SearchViewModel::class.java]
         binding.searchViewMovie.setOnQueryTextListener(this)
         binding.searchViewMovie.setOnCloseListener(this)
         binding.favoriteMovies.layoutManager = LinearLayoutManager(requireContext())

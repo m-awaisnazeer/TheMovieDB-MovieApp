@@ -11,13 +11,15 @@ import com.example.themoviedb.common.data.api.model.mappers.toCachedMovie
 import com.example.themoviedb.common.data.cache.MovieDatabase
 import com.example.themoviedb.common.data.cache.model.CachedMovie
 import com.example.themoviedb.common.data.cache.model.MovieRemoteKeys
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class MovieRemoteMediator(
-    private val api: TheMovieDbApi, private val movieDB: MovieDatabase
+class MovieRemoteMediator @Inject constructor(
+    private val theMovieDbApi: TheMovieDbApi,
+    private val movieDatabase: MovieDatabase
 ) : RemoteMediator<Int, CachedMovie>() {
-    private val movieDao = movieDB.movieDao()
-    private val remoteKeysDao = movieDB.remoteKeysDao()
+    private val movieDao = movieDatabase.movieDao()
+    private val remoteKeysDao = movieDatabase.remoteKeysDao()
 
     override suspend fun load(
         loadType: LoadType, state: PagingState<Int, CachedMovie>
@@ -55,11 +57,11 @@ class MovieRemoteMediator(
                     nextPage
                 }
             }
-            val response = api.getPopularMovies(page = currentPage)
+            val response = theMovieDbApi.getPopularMovies(page = currentPage)
             val endOfPaginationReached = response.totalPages == currentPage
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
-            movieDB.withTransaction {
+            movieDatabase.withTransaction {
                     if (loadType == LoadType.REFRESH) {
                         movieDao.deleteAllMovies()
                         remoteKeysDao.deleteAllRemoteKeys()
