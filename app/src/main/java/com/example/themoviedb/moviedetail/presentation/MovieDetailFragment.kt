@@ -25,7 +25,7 @@ class MovieDetailFragment : Fragment() {
     private val viewModel: MovieDetailViewModel by viewModels()
 
     private val args: MovieDetailFragmentArgs by navArgs()
-    val currentMovie: Movie by lazy {
+    private val currentMovie: Movie by lazy {
         args.movie
     }
 

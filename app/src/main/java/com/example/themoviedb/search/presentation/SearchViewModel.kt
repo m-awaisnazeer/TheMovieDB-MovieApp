@@ -8,6 +8,7 @@ import com.example.themoviedb.common.utils.Resource
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.search.domain.SearchMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -24,13 +25,21 @@ class SearchViewModel @Inject constructor(
         MutableStateFlow(SearchMovieUiState.Initial)
     val state: StateFlow<SearchMovieUiState> = _state
 
+    private var job = Job()
+        get() {
+            if (field.isCancelled) field = Job()
+            return field
+        }
+
     private fun updateQuery(newText: String) {
+        job.cancel()
         _state.value = SearchMovieUiState.Loading
         if (newText.isEmpty()){
             _state.value = SearchMovieUiState.Initial
             return
         }
-        viewModelScope.launch(dispatcherProvider.IO) {
+        val coroutineContext = job + dispatcherProvider.IO
+        viewModelScope.launch(coroutineContext) {
             searchMovies(newText).collect {
                 when (it) {
                     is Resource.Error -> {
