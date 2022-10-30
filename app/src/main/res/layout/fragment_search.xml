@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/search_view_movie" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favorite_movies"
+        android:id="@+id/search_movies_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"

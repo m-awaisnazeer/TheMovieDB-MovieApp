@@ -3,6 +3,8 @@ package com.example.themoviedb.favorites.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.themoviedb.common.domain.entities.Movie
@@ -12,10 +14,9 @@ import kotlin.reflect.KFunction1
 
 
 class FavoriteMoviesAdapter(
-    private val movies: List<Movie>,
     private val onMovieClick: KFunction1<Movie, Unit>,
     private val updateMovie: (Movie) -> Unit
-) : RecyclerView.Adapter<FavoriteMoviesAdapter.FavoriteMovieViewHolder>() {
+) : ListAdapter<Movie,FavoriteMoviesAdapter.FavoriteMovieViewHolder>(DIFF_CALLBACK) {
 
     inner class FavoriteMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var binding: FavoriteMovieItemBinding
@@ -48,8 +49,18 @@ class FavoriteMoviesAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteMovieViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = movies.size
+    companion object{
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>(){
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem.equals(newItem)
+            }
+        }
+    }
 }

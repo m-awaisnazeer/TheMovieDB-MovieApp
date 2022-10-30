@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.common.domain.entities.Movie
 import com.example.themoviedb.databinding.FragmentFavoritesBinding
@@ -34,11 +35,14 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.favoriteMovies.layoutManager = LinearLayoutManager(requireContext())
+        binding.favoritesMoviesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = FavoriteMoviesAdapter(::onMovieClick, ::addToFavorites)
+        binding.favoritesMoviesRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        binding.favoritesMoviesRecyclerView.adapter=adapter
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 favoritesViewModel.favoriteMovies.collect {
-                    binding.favoriteMovies.adapter = FavoriteMoviesAdapter(it,::onMovieClick, ::addToFavorites)
+                    adapter.submitList(it)
                 }
             }
         }

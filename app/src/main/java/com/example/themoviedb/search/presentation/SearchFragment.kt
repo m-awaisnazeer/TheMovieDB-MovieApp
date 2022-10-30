@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.R
 import com.example.themoviedb.common.domain.entities.Movie
@@ -28,6 +29,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
     private val binding get() = _binding!!
 
     private val searchViewModel: SearchViewModel by viewModels()
+    private lateinit var adapter: FavoriteMoviesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,7 +42,10 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
         super.onViewCreated(view, savedInstanceState)
         binding.searchViewMovie.setOnQueryTextListener(this)
         binding.searchViewMovie.setOnCloseListener(this)
-        binding.favoriteMovies.layoutManager = LinearLayoutManager(requireContext())
+        binding.searchMoviesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.searchMoviesRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        adapter = FavoriteMoviesAdapter(::onMovieClick, ::addToFavorites)
+        binding.searchMoviesRecyclerView.adapter = adapter
         subscribeToUiState()
     }
 
@@ -85,8 +90,8 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
                         }
                         is SearchMovieUiState.Success -> {
                             binding.searchProgressBar.isVisible = false
-                            binding.favoriteMovies.isVisible = true
-                            binding.favoriteMovies.adapter = FavoriteMoviesAdapter(it.data, ::onMovieClick, ::addToFavorites)
+                            binding.searchMoviesRecyclerView.isVisible = true
+                            adapter.submitList(it.data)
                         }
                         SearchMovieUiState.Initial -> {
                             setUpInitialState()
@@ -110,7 +115,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
         binding.initialSearchText.isVisible = true
         binding.initialSearchImageView.isVisible = true
         binding.searchProgressBar.isVisible = false
-        binding.favoriteMovies.isVisible = false
+        binding.searchMoviesRecyclerView.isVisible = false
         binding.initialSearchImageView.setImageResource(R.drawable.ic_search_24)
         binding.initialSearchText.text = requireContext().getText(R.string.initial_search_text_label)
     }
@@ -119,7 +124,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
         binding.initialSearchText.isVisible = false
         binding.initialSearchImageView.isVisible = false
         binding.searchProgressBar.isVisible = false
-        binding.favoriteMovies.isVisible = false
+        binding.searchMoviesRecyclerView.isVisible = false
         binding.searchViewMovie.clearFocus()
     }
 
@@ -127,7 +132,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
         binding.initialSearchText.isVisible = true
         binding.initialSearchImageView.isVisible = true
         binding.searchProgressBar.isVisible = false
-        binding.favoriteMovies.isVisible = false
+        binding.searchMoviesRecyclerView.isVisible = false
         binding.initialSearchImageView.setImageResource(R.drawable.ic_search_off_24)
         binding.initialSearchText.text = requireContext().getText(R.string.no_result_found)
     }
