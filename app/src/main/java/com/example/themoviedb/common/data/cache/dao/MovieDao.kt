@@ -26,7 +26,7 @@ interface MovieDao {
     fun deleteAllMovies()
 
     @Query("SELECT * FROM Movie WHERE isFavorite=:isFavorite")
-    fun getFavoriteMovie(isFavorite: Boolean): Flow<List<CachedMovie>>
+    fun getFavoriteMovies(isFavorite: Boolean): Flow<List<CachedMovie>>
 
     @Query("UPDATE Movie SET isFavorite=:isFavorite where id=:id")
     fun updateMovie(id: Int, isFavorite: Boolean):Int

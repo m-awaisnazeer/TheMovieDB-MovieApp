@@ -38,7 +38,7 @@ class MovieRepositoryImp(
         }
 
     override fun getFavoriteMovies(): Flow<List<Movie>> = flow {
-        val cachedMovies = movieDB.movieDao().getFavoriteMovie(true)
+        val cachedMovies = movieDB.movieDao().getFavoriteMovies(true)
         cachedMovies.collect {
             emit(it.map { toDomain(it) })
         }
@@ -47,7 +47,7 @@ class MovieRepositoryImp(
     override suspend fun updateMovie(movie: Movie) {
         movie.apply {
             val update: Int = movieDB.movieDao().updateMovie(id, isFavorite)
-            if (update == -1) {
+            if (update == 0) {
                 movieDB.movieDao().insert(
                     CachedMovie(
                         posterPath = posterPath,

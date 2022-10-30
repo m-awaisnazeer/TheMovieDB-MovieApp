@@ -27,8 +27,10 @@
     <style name="txt_movie_name" parent="TextAppearance.AppCompat.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:ellipsize">end</item>
-        <item name="maxLines">1</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">?android:colorPrimary</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:layout_marginTop">5dp</item>
     </style>
 
 </resources>

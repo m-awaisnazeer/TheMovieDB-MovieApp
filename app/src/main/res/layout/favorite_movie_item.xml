@@ -19,17 +19,14 @@
 
     <TextView
         android:id="@+id/txt_favorite_movie_name"
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/txt_movie_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="26dp"
-        android:ellipsize="end"
         android:maxLines="2"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:textColor="?android:colorPrimary"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/txt_favorite_movie_release"
         app:layout_constraintEnd_toStartOf="@id/img_favorite"
         app:layout_constraintStart_toEndOf="@id/img_favorite_poster"

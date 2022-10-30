@@ -36,7 +36,7 @@ Uses concepts of the notorious Uncle Bob's architecture called [Clean Architectu
 - [Turbine](https://github.com/cashapp/turbine) Turbine is a small testing library for kotlinx.coroutines Flow.
 - [JUnit](https://junit.org/junit5/) JUnit is a simple framework to write repeatable tests.
 - [Truth](https://truth.dev/) Truth is a library for performing assertions in tests.
-- [Roboelectric](https://robolectric.org/) Robolectric is a framework that brings fast and reliable unit tests to Android. Tests run inside the JVM on your workstation in seconds.
+- [Robolectric](https://robolectric.org/) Robolectric is a framework that brings fast and reliable unit tests to Android. Tests run inside the JVM on your workstation in seconds.
 - JetPack
   - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - Used get lifecyle event of an activity or fragment and performs some action in response to change
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes.
