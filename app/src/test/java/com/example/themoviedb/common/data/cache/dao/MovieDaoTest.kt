@@ -2,9 +2,9 @@ package com.example.themoviedb.common.data.cache.dao
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
+import com.example.themoviedb.common.data.FakeDataFactory
 import com.example.themoviedb.common.data.FakeDataFactory.cachedMovie1
 import com.example.themoviedb.common.data.FakeDataFactory.fakeMovies
 import com.example.themoviedb.common.data.cache.MovieDatabase
@@ -31,8 +31,7 @@ class MovieDaoTest {
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
-        movieDatabase = Room.inMemoryDatabaseBuilder(context, MovieDatabase::class.java)
-            .allowMainThreadQueries().build()
+        movieDatabase = FakeDataFactory.movieDatabase(context)
         movieDao = movieDatabase.movieDao()
     }
 
