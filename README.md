@@ -51,3 +51,8 @@ Uses concepts of the notorious Uncle Bob's architecture called [Clean Architectu
 # TODO
 - [ ] Unit tests
 - [ ] Jacoco for test coverage
+
+# References:
+ - Book: [Real-World Android by Tutorials](https://www.kodeco.com/books/real-world-android-by-tutorials)
+ - Guide: [Guide to app architecture.](https://developer.android.com/topic/architecture/intro)
+ - Repository: This repository code is mostly inspired by [Real-World Android by Tutorials](https://github.com/kodecocodes/adva-materials) github Repository.
