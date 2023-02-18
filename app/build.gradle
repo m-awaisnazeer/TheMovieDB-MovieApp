@@ -5,6 +5,8 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.dagger.hilt.android'
 }
+apply plugin: "io.gitlab.arturbosch.detekt"
+
 
 android {
     namespace 'com.example.themoviedb'

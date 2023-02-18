@@ -1,0 +1,28 @@
+## 1
+name: detekt
+## 2
+on:
+  push:
+    branches:
+      - detekt
+  pull_request:
+    branches:
+      - detekt
+## 3
+jobs:
+  detekt:
+    ## 4
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout"
+        uses: actions/checkout@v3
+      - name: "detekt"
+        uses: natiginfo/action-detekt-all@1.22.0
+
+      # Make sure we always run this upload task,
+      # because the previous step may fail if there are findings.
+      - name: Upload SARIF to Github using the upload-sarif action
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: build/reports/detekt/detekt.sarif
