@@ -38,6 +38,16 @@ class MovieAdapter(
             binding.root.setOnClickListener {
                 onMovieClick(movie)
             }
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
+            notifyDataSetChanged()
         }
     }
 
