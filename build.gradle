@@ -23,6 +23,7 @@ apply plugin: "io.gitlab.arturbosch.detekt"
 subprojects {
     apply plugin: "io.gitlab.arturbosch.detekt"
     detekt {
+        basePath = rootProject.projectDir.absolutePath
         config = files("${project.rootDir}/detekt.yml")
         parallel = true
     }
