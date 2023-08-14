@@ -2,8 +2,8 @@ package com.example.themoviedb.moviedetail.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themoviedb.common.domain.entities.Movie
-import com.example.themoviedb.common.utils.DispatcherProvider
+import com.applications.domain.domain.entities.Movie
+import com.applications.utils.DispatcherProvider
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ class MovieDetailViewModel @Inject constructor(
     private val _state: MutableStateFlow<MovieUIState> = MutableStateFlow(MovieUIState.Loading)
     val state: StateFlow<MovieUIState> = _state
 
-    private fun addToFavorites(movie:Movie) {
+    private fun addToFavorites(movie: Movie) {
         viewModelScope.launch(dispatcherProvider.IO) {
             favoriteMoviesUseCase(movie)
         }

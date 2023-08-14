@@ -4,15 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.themoviedb.common.data.MovieRepositoryImp
-import com.example.themoviedb.common.data.api.TheMovieDbApi
-import com.example.themoviedb.common.data.cache.MovieDatabase
-import com.example.themoviedb.common.data.cache.dao.MovieDao
-import com.example.themoviedb.common.data.cache.dao.RemoteKeysDao
-import com.example.themoviedb.common.domain.repositories.MovieRepository
-import com.example.themoviedb.common.utils.Constants
-import com.example.themoviedb.common.utils.DefaultDispatcher
-import com.example.themoviedb.common.utils.DispatcherProvider
+import com.applications.data.MovieRepositoryImp
+import com.applications.network.TheMovieDbApi
+import com.applications.database.MovieDatabase
+import com.applications.database.dao.MovieDao
+import com.applications.database.dao.RemoteKeysDao
+import com.applications.domain.domain.repositories.MovieRepository
+import com.applications.utils.Constants
+import com.applications.utils.DefaultDispatcher
+import com.applications.utils.DispatcherProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -50,7 +50,8 @@ abstract class MovieModule {
 
         @Provides
         @Singleton
-        fun bindDispatcher(): DispatcherProvider = DefaultDispatcher()
+        fun bindDispatcher(): DispatcherProvider =
+            DefaultDispatcher()
 
         @Provides
         @Singleton
@@ -76,5 +77,5 @@ abstract class MovieModule {
 
     @Binds
     @Singleton
-    abstract fun bindMovieRepository(repositoryImpl: MovieRepositoryImp):MovieRepository
+    abstract fun bindMovieRepository(repositoryImpl: MovieRepositoryImp): MovieRepository
 }

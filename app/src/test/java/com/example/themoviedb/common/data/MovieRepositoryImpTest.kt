@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
-import com.example.themoviedb.common.data.api.TheMovieDbApi
-import com.example.themoviedb.common.data.cache.MovieDatabase
+import com.applications.network.TheMovieDbApi
+import com.applications.database.MovieDatabase
 import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -23,17 +23,17 @@ class MovieRepositoryImpTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var repository: MovieRepositoryImp
-    private lateinit var movieDatabase: MovieDatabase
+    private lateinit var repository: com.applications.data.MovieRepositoryImp
+    private lateinit var movieDatabase: com.applications.database.MovieDatabase
     private lateinit var context: Context
-    private lateinit var api: TheMovieDbApi
+    private lateinit var api: com.applications.network.TheMovieDbApi
 
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
         movieDatabase = FakeDataFactory.movieDatabase(context)
         api = mock()
-        repository = MovieRepositoryImp(api, movieDatabase)
+        repository = com.applications.data.MovieRepositoryImp(api, movieDatabase)
     }
 
     @After

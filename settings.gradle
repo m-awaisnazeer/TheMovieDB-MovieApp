@@ -14,3 +14,13 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AwaisAhmadAssignment"
 include ':app'
+include ':core:database'
+include ':core:network'
+include ':core:data'
+include ':core:common'
+include ':core:utils'
+include ':feature:home'
+include ':feature:search'
+include ':feature:favorite'
+include ':feature:details'
+include ':core:domain'

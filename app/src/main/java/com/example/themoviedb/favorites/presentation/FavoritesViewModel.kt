@@ -2,8 +2,8 @@ package com.example.themoviedb.favorites.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themoviedb.common.domain.entities.Movie
-import com.example.themoviedb.common.utils.DispatcherProvider
+import com.applications.domain.domain.entities.Movie
+import com.applications.utils.DispatcherProvider
 import com.example.themoviedb.favorites.domain.GetFavoriteMovies
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

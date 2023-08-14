@@ -41,7 +41,7 @@
         tools:layout="@layout/fragment_movie_detail" >
         <argument
             android:name="movie"
-            app:argType="com.example.themoviedb.common.domain.entities.Movie"
+            app:argType="com.applications.domain.domain.entities.Movie"
             app:nullable="false" />
     </fragment>
 </navigation>

@@ -1,6 +1,6 @@
 package com.example.themoviedb.search.presentation
 
-import com.example.themoviedb.common.domain.entities.Movie
+import com.applications.domain.domain.entities.Movie
 
 sealed class SearchMovieUiState {
     data class Error(val message: String) : SearchMovieUiState()

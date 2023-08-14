@@ -2,21 +2,21 @@ package com.example.themoviedb.common.data
 
 import android.content.Context
 import androidx.room.Room
-import com.example.themoviedb.common.data.cache.MovieDatabase
-import com.example.themoviedb.common.data.cache.model.CachedMovie
-import com.example.themoviedb.common.domain.entities.Movie
+import com.applications.database.MovieDatabase
+import com.applications.database.model.CachedMovie
+import com.applications.domain.domain.entities.Movie
 
 object FakeDataFactory {
 
-    fun cachedMovie1() = CachedMovie(
+    fun cachedMovie1() = com.applications.database.model.CachedMovie(
         1, "posterPath", "releaseDate", "title", "overView", false
     )
 
-    private fun cachedMovie2() = CachedMovie(
+    private fun cachedMovie2() = com.applications.database.model.CachedMovie(
         2, "posterPath2", "releaseDate2", "title2", "overView2", true
     )
 
-    fun movie2UnFavorite() = Movie(
+    fun movie2UnFavorite() = com.applications.domain.domain.entities.Movie(
         2, "posterPath2", "releaseDate2", "title2", "overView2", false
     )
 
@@ -24,8 +24,8 @@ object FakeDataFactory {
         cachedMovie1(), cachedMovie2()
     )
 
-    fun movieDatabase(context: Context): MovieDatabase {
-        return Room.inMemoryDatabaseBuilder(context, MovieDatabase::class.java)
+    fun movieDatabase(context: Context): com.applications.database.MovieDatabase {
+        return Room.inMemoryDatabaseBuilder(context, com.applications.database.MovieDatabase::class.java)
             .allowMainThreadQueries().build()
     }
 

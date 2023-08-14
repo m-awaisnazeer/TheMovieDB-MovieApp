@@ -7,7 +7,7 @@ import app.cash.turbine.test
 import com.example.themoviedb.common.data.FakeDataFactory
 import com.example.themoviedb.common.data.FakeDataFactory.cachedMovie1
 import com.example.themoviedb.common.data.FakeDataFactory.fakeMovies
-import com.example.themoviedb.common.data.cache.MovieDatabase
+import com.applications.database.MovieDatabase
 import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -24,9 +24,9 @@ class MovieDaoTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var movieDatabase: MovieDatabase
+    private lateinit var movieDatabase: com.applications.database.MovieDatabase
     private lateinit var context: Context
-    private lateinit var movieDao: MovieDao
+    private lateinit var movieDao: com.applications.database.dao.MovieDao
 
     @Before
     fun setUp() {

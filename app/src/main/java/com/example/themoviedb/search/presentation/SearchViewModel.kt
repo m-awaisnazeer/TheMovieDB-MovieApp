@@ -2,9 +2,9 @@ package com.example.themoviedb.search.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themoviedb.common.domain.entities.Movie
-import com.example.themoviedb.common.utils.DispatcherProvider
-import com.example.themoviedb.common.utils.Resource
+import com.applications.domain.domain.entities.Movie
+import com.applications.utils.DispatcherProvider
+import com.applications.utils.Resource
 import com.example.themoviedb.home.domain.FavoriteMoviesUseCase
 import com.example.themoviedb.search.domain.SearchMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,7 +49,7 @@ class SearchViewModel @Inject constructor(
                         if (it.data.isNullOrEmpty()) {
                             _state.value = SearchMovieUiState.NoResultFound
                         } else {
-                            _state.value = SearchMovieUiState.Success(it.data)
+                            _state.value = SearchMovieUiState.Success(it.data as  List<Movie>)
                         }
                     }
                 }

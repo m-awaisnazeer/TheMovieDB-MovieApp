@@ -12,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themoviedb.common.domain.entities.Movie
+import com.applications.domain.domain.entities.Movie
 import com.example.themoviedb.databinding.FragmentFavoritesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -48,7 +48,7 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    private fun onMovieClick(movie:Movie){
+    private fun onMovieClick(movie: Movie){
         val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie)
         findNavController().navigate(action)
     }

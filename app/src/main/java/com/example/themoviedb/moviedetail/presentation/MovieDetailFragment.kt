@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.themoviedb.common.domain.entities.Movie
-import com.example.themoviedb.common.utils.Constants
+import com.applications.domain.domain.entities.Movie
+import com.applications.utils.Constants
 import com.example.themoviedb.databinding.FragmentMovieDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
