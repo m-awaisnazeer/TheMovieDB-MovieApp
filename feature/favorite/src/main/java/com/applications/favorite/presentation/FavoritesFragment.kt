@@ -1,4 +1,4 @@
-package com.example.themoviedb.favorites.presentation
+package com.applications.favorite.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applications.domain.entities.Movie
-import com.example.themoviedb.databinding.FragmentFavoritesBinding
+import com.applications.favorite.databinding.FragmentFavoritesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -49,8 +48,8 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie){
-        val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie)
-        findNavController().navigate(action)
+//        val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie)
+//        findNavController().navigate(action)
     }
 
     private fun addToFavorites(movie: Movie) {

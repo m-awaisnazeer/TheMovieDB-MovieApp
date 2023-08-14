@@ -1,4 +1,4 @@
-package com.example.themoviedb.favorites.presentation
+package com.applications.favorite.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.applications.domain.entities.Movie
+import com.applications.favorite.databinding.FavoriteMovieItemBinding
 import com.applications.utils.Constants
-import com.example.themoviedb.databinding.FavoriteMovieItemBinding
 import kotlin.reflect.KFunction1
 
 
 class FavoriteMoviesAdapter(
     private val onMovieClick: KFunction1<Movie, Unit>,
     private val updateMovie: (Movie) -> Unit
-) : ListAdapter<Movie,FavoriteMoviesAdapter.FavoriteMovieViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<Movie, FavoriteMoviesAdapter.FavoriteMovieViewHolder>(DIFF_CALLBACK) {
 
     inner class FavoriteMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var binding: FavoriteMovieItemBinding

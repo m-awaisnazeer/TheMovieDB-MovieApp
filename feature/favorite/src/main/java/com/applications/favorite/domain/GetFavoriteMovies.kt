@@ -1,4 +1,4 @@
-package com.example.themoviedb.favorites.domain
+package com.applications.favorite.domain
 
 import com.applications.domain.repositories.MovieRepository
 import javax.inject.Inject

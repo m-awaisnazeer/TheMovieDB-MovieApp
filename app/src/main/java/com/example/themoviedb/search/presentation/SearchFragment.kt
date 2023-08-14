@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.R
 import com.applications.domain.entities.Movie
 import com.example.themoviedb.databinding.FragmentSearchBinding
-import com.example.themoviedb.favorites.presentation.FavoriteMoviesAdapter
+import com.applications.favorite.presentation.FavoriteMoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

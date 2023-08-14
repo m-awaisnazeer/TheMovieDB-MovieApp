@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.example.themoviedb.favorites.presentation.FavoritesFragment"
+        android:name="com.applications.favorite.presentation.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
