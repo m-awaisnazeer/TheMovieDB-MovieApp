@@ -1,6 +1,6 @@
-package com.example.themoviedb.moviedetail.presentation
+package com.applications.details.presentation
 
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 
 sealed class MovieUIState {
     object Loading : MovieUIState()

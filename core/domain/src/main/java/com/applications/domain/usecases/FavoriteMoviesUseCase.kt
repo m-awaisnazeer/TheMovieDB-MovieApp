@@ -1,7 +1,7 @@
-package com.example.themoviedb.home.domain
+package com.applications.domain.usecases
 
-import com.applications.domain.domain.entities.Movie
-import com.applications.domain.domain.repositories.MovieRepository
+import com.applications.domain.entities.Movie
+import com.applications.domain.repositories.MovieRepository
 import javax.inject.Inject
 
 class FavoriteMoviesUseCase @Inject constructor(

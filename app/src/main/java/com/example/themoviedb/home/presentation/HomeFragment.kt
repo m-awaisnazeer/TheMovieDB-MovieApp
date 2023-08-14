@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 import com.applications.common.pagging.LoaderAdapter
 import com.applications.ui.MovieAdapter
 import com.example.themoviedb.databinding.FragmentHomeBinding

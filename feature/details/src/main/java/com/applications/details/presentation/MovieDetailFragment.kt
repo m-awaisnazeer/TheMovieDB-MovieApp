@@ -1,4 +1,4 @@
-package com.example.themoviedb.moviedetail.presentation
+package com.applications.details.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.navArgs
+import com.applications.details.databinding.FragmentMovieDetailBinding
 import com.bumptech.glide.Glide
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 import com.applications.utils.Constants
-import com.example.themoviedb.databinding.FragmentMovieDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,9 +23,16 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: MovieDetailViewModel by viewModels()
 
-    private val args: MovieDetailFragmentArgs by navArgs()
+    //private val args: MovieDetailFragmentArgs by navArgs()
     private val currentMovie: Movie by lazy {
-        args.movie
+        Movie(
+            id = 921636,
+            posterPath = "5dliMQ2ODbGNoq0hlefdnuXQxMw.jpg",
+            releaseDate = "2023-07-07",
+            title = "The Out-Laws",
+            overView = "A straight-laced bank manager is about to marry the love of his life. When his bank is held up by infamous Ghost Bandits during his wedding week, he believes his future in-laws who just arrived in town, are the infamous Out-Laws.",
+            isFavorite = false
+        )
     }
 
     override fun onCreateView(

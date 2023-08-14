@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.R
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 import com.example.themoviedb.databinding.FragmentSearchBinding
 import com.example.themoviedb.favorites.presentation.FavoriteMoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint

@@ -2,9 +2,7 @@ package com.example.themoviedb.common.data
 
 import android.content.Context
 import androidx.room.Room
-import com.applications.database.MovieDatabase
-import com.applications.database.model.CachedMovie
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 
 object FakeDataFactory {
 
@@ -16,7 +14,7 @@ object FakeDataFactory {
         2, "posterPath2", "releaseDate2", "title2", "overView2", true
     )
 
-    fun movie2UnFavorite() = com.applications.domain.domain.entities.Movie(
+    fun movie2UnFavorite() = Movie(
         2, "posterPath2", "releaseDate2", "title2", "overView2", false
     )
 

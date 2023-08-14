@@ -2,7 +2,7 @@ package com.applications.network.model.mappers
 
 import com.applications.network.model.ApiMovie
 import com.applications.database.model.CachedMovie
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 
 fun ApiMovie.toCachedMovie(): CachedMovie {
     return CachedMovie(

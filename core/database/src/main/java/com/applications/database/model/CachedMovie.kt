@@ -2,7 +2,7 @@ package com.applications.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 
 @Entity(tableName = "Movie")
 data class CachedMovie(

@@ -9,7 +9,7 @@ import com.applications.network.TheMovieDbApi
 import com.applications.database.MovieDatabase
 import com.applications.database.dao.MovieDao
 import com.applications.database.dao.RemoteKeysDao
-import com.applications.domain.domain.repositories.MovieRepository
+import com.applications.domain.repositories.MovieRepository
 import com.applications.utils.Constants
 import com.applications.utils.DefaultDispatcher
 import com.applications.utils.DispatcherProvider

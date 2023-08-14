@@ -6,8 +6,8 @@ import com.applications.network.model.mappers.toDomainMovie
 import com.applications.database.MovieDatabase
 import com.applications.database.model.CachedMovie
 import com.applications.database.model.CachedMovie.Companion.toDomain
-import com.applications.domain.domain.entities.Movie
-import com.applications.domain.domain.repositories.MovieRepository
+import com.applications.domain.entities.Movie
+import com.applications.domain.repositories.MovieRepository
 import com.applications.common.pagging.MovieRemoteMediator
 import com.applications.utils.Resource
 import kotlinx.coroutines.flow.Flow

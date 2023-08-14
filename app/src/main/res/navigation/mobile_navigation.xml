@@ -36,12 +36,12 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.example.themoviedb.moviedetail.presentation.MovieDetailFragment"
+        android:name="com.applications.details.presentation.MovieDetailFragment"
         android:label="@string/title_movie_details"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
             android:name="movie"
-            app:argType="com.applications.domain.domain.entities.Movie"
+            app:argType="com.applications.domain.entities.Movie"
             app:nullable="false" />
     </fragment>
 </navigation>

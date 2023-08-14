@@ -34,7 +34,7 @@
 
 package com.example.themoviedb.search.presentation
 
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 
 sealed class SearchMovieEvent {
     data class QueryInput(val input: String) : SearchMovieEvent()

@@ -1,6 +1,6 @@
-package com.example.themoviedb.moviedetail.domain
+package com.applications.details.domain
 
-import com.applications.domain.domain.repositories.MovieRepository
+import com.applications.domain.repositories.MovieRepository
 import javax.inject.Inject
 
 class GetMovie @Inject constructor(

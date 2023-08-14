@@ -1,4 +1,4 @@
-package com.applications.domain.domain.entities
+package com.applications.domain.entities
 
 import android.os.Parcel
 import android.os.Parcelable

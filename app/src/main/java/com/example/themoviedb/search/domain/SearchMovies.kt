@@ -1,6 +1,6 @@
 package com.example.themoviedb.search.domain
 
-import com.applications.domain.domain.repositories.MovieRepository
+import com.applications.domain.repositories.MovieRepository
 import javax.inject.Inject
 
 class SearchMovies @Inject constructor(

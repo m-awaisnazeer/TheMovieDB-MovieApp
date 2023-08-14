@@ -1,7 +1,7 @@
-package com.applications.domain.domain.repositories
+package com.applications.domain.repositories
 
 import androidx.paging.PagingData
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 import com.applications.utils.Resource
 import kotlinx.coroutines.flow.Flow
 

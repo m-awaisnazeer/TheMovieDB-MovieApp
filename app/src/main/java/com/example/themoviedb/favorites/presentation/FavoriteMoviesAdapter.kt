@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.applications.domain.domain.entities.Movie
+import com.applications.domain.entities.Movie
 import com.applications.utils.Constants
 import com.example.themoviedb.databinding.FavoriteMovieItemBinding
 import kotlin.reflect.KFunction1
