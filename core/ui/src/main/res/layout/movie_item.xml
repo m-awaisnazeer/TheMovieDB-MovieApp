@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.themoviedb.common.presentation.SquareImageView
+        <com.applications.ui.SquareImageView
             android:id="@+id/img_poster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

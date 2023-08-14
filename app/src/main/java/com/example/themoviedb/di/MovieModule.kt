@@ -1,4 +1,4 @@
-package com.example.themoviedb.common.di
+package com.example.themoviedb.di
 
 import android.content.Context
 import androidx.room.Room

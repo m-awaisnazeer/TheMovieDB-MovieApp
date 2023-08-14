@@ -1,4 +1,4 @@
-package com.example.themoviedb.common.presentation
+package com.applications.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.applications.domain.domain.entities.Movie
+import com.applications.ui.databinding.MovieItemBinding
 import com.applications.utils.Constants.MOVIE_PATH
-import com.example.themoviedb.databinding.MovieItemBinding
 import kotlin.reflect.KFunction1
 
 class MovieAdapter(

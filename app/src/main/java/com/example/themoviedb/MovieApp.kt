@@ -1,4 +1,4 @@
-package com.example.themoviedb.common.presentation
+package com.example.themoviedb
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

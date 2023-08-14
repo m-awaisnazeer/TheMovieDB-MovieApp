@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applications.domain.domain.entities.Movie
 import com.applications.common.pagging.LoaderAdapter
-import com.example.themoviedb.common.presentation.MovieAdapter
+import com.applications.ui.MovieAdapter
 import com.example.themoviedb.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.moviesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        val adapter = MovieAdapter(::addToFavorites,::onMovieClick)
+        val adapter = MovieAdapter(::addToFavorites, ::onMovieClick)
         binding.moviesRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoaderAdapter(),
             footer = LoaderAdapter()

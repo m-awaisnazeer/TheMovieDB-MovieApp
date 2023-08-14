@@ -1,4 +1,4 @@
-package com.example.themoviedb.common.presentation
+package com.applications.ui
 
 import android.content.Context
 import android.util.AttributeSet
