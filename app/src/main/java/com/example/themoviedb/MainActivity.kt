@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_search, R.id.navigation_favorites
+                R.id.home_nav_graph, R.id.search_nav_graph, R.id.favorites_nav_graph
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         arguments: Bundle?
     ) {
         when (destination.id) {
-            R.id.navigation_search -> {
+            R.id.search_nav_graph -> {
                 binding.toolbar.isVisible = false
             }
             else -> {

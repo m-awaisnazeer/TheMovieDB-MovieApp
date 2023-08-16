@@ -3,45 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/home_nav_graph">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.applications.home.presentation.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_navigation_home_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.applications.search.presentation.SearchFragment"
-        android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_navigation_search_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_favorites"
-        android:name="com.applications.favorite.presentation.FavoritesFragment"
-        android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" >
-        <action
-            android:id="@+id/action_navigation_favorites_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="com.applications.details.presentation.MovieDetailFragment"
-        android:label="@string/title_movie_details"
-        tools:layout="@layout/fragment_movie_detail" >
-        <argument
-            android:name="movie"
-            app:argType="com.applications.domain.entities.Movie"
-            app:nullable="false" />
-    </fragment>
+    <include
+        app:graph="@navigation/home_navigation"
+        tools:layout="@layout/fragment_home" />
+    <include app:graph="@navigation/search_navigation" />
+    <include app:graph="@navigation/favorites_navigation" />
+    <include app:graph="@navigation/details_navigation" />
 </navigation>

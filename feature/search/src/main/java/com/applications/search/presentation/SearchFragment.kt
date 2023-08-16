@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applications.domain.entities.Movie
@@ -106,7 +109,10 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
     }
 
     private fun onMovieClick(movie: Movie) {
-
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("android-app://com.example.themoviedb/movieDetailFragment".toUri())
+            .build()
+        findNavController().navigate(request)
     }
 
     private fun setUpInitialState() {

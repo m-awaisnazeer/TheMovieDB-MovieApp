@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applications.domain.entities.Movie
@@ -49,7 +52,10 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie){
-
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("android-app://com.example.themoviedb/movieDetailFragment".toUri())
+            .build()
+        findNavController().navigate(request)
     }
 
     private fun addToFavorites(movie: Movie) {

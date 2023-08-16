@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">TheMovieDB Movie App</string>
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_favorites">Favorites</string>
-    <string name="title_movie_details">Movie Details</string>
 </resources>
