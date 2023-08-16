@@ -1,4 +1,4 @@
-package com.example.themoviedb.search.domain
+package com.applications.search.domain
 
 import com.applications.domain.repositories.MovieRepository
 import javax.inject.Inject

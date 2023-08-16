@@ -1,0 +1,4 @@
+<resources>
+    <string name="initial_search_text_label">Use the above search field to find latest movies across the globe from TheMovieDb</string>
+    <string name="no_result_found">No results found you are looking for!</string>
+</resources>

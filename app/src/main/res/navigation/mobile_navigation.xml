@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.themoviedb.home.presentation.HomeFragment"
+        android:name="com.applications.home.presentation.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.themoviedb.search.presentation.SearchFragment"
+        android:name="com.applications.search.presentation.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" >
         <action

@@ -1,4 +1,4 @@
-package com.example.themoviedb.home.presentation
+package com.applications.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import com.applications.domain.entities.Movie
 import com.applications.utils.DispatcherProvider
 import com.applications.domain.usecases.FavoriteMoviesUseCase
-import com.example.themoviedb.home.domain.GetAllMovies
+import com.applications.home.domain.GetAllMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

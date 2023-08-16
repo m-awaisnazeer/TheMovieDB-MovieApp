@@ -1,4 +1,4 @@
-package com.example.themoviedb.search.presentation
+package com.applications.search.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,7 @@ import com.applications.domain.entities.Movie
 import com.applications.utils.DispatcherProvider
 import com.applications.utils.Resource
 import com.applications.domain.usecases.FavoriteMoviesUseCase
-import com.example.themoviedb.search.domain.SearchMovies
+import com.applications.search.domain.SearchMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,7 +49,7 @@ class SearchViewModel @Inject constructor(
                         if (it.data.isNullOrEmpty()) {
                             _state.value = SearchMovieUiState.NoResultFound
                         } else {
-                            _state.value = SearchMovieUiState.Success(it.data as  List<Movie>)
+                            _state.value = SearchMovieUiState.Success(it.data as List<Movie>)
                         }
                     }
                 }

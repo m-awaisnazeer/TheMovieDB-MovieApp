@@ -4,6 +4,4 @@
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_movie_details">Movie Details</string>
-    <string name="initial_search_text_label">Use the above search field to find latest movies across the globe from TheMovieDb</string>
-    <string name="no_result_found">No results found you are looking for!</string>
 </resources>

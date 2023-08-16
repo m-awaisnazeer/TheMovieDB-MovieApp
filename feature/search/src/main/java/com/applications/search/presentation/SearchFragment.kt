@@ -1,4 +1,4 @@
-package com.example.themoviedb.search.presentation
+package com.applications.search.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,13 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themoviedb.R
 import com.applications.domain.entities.Movie
-import com.example.themoviedb.databinding.FragmentSearchBinding
-import com.applications.favorite.presentation.FavoriteMoviesAdapter
+import com.applications.search.R
+import com.applications.search.databinding.FragmentSearchBinding
+import com.applications.ui.FavoriteMoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -107,8 +106,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
     }
 
     private fun onMovieClick(movie: Movie) {
-        val action = SearchFragmentDirections.actionNavigationSearchToMovieDetailFragment(movie)
-        findNavController().navigate(action)
+
     }
 
     private fun setUpInitialState() {

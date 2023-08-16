@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applications.domain.entities.Movie
 import com.applications.favorite.databinding.FragmentFavoritesBinding
+import com.applications.ui.FavoriteMoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,8 +49,7 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie){
-//        val action = FavoritesFragmentDirections.actionNavigationFavoritesToMovieDetailFragment(movie)
-//        findNavController().navigate(action)
+
     }
 
     private fun addToFavorites(movie: Movie) {

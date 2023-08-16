@@ -1,4 +1,4 @@
-package com.applications.favorite.presentation
+package com.applications.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.applications.domain.entities.Movie
-import com.applications.favorite.databinding.FavoriteMovieItemBinding
+import com.applications.ui.databinding.FavoriteMovieItemBinding
 import com.applications.utils.Constants
 import kotlin.reflect.KFunction1
 

@@ -1,4 +1,4 @@
-package com.example.themoviedb.search.presentation
+package com.applications.search.presentation
 
 import com.applications.domain.entities.Movie
 

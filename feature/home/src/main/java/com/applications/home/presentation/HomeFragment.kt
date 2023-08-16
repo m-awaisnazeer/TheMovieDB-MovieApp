@@ -1,4 +1,4 @@
-package com.example.themoviedb.home.presentation
+package com.applications.home.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applications.domain.entities.Movie
 import com.applications.common.pagging.LoaderAdapter
+import com.applications.home.databinding.FragmentHomeBinding
 import com.applications.ui.MovieAdapter
-import com.example.themoviedb.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -56,8 +55,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie){
-        val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailFragment(movie)
-        findNavController().navigate(action)
+
     }
 
     override fun onDestroyView() {
