@@ -13,10 +13,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.applications.domain.entities.Movie
 import com.applications.common.pagging.LoaderAdapter
+import com.applications.domain.entities.Movie
 import com.applications.home.databinding.FragmentHomeBinding
 import com.applications.ui.MovieAdapter
+import com.applications.utils.JsonParser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -58,8 +59,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie){
-        val request = NavDeepLinkRequest.Builder
-            .fromUri("android-app://com.example.themoviedb/movieDetailFragment".toUri())
+        val request = NavDeepLinkRequest.Builder.fromUri(
+                "android-app://com.example.themoviedb/movieDetailFragment?movie=${
+                    JsonParser.toJson(
+                        movie
+                    )
+                }".toUri()
+            )
             .build()
         findNavController().navigate(request)
     }

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.applications.domain.entities.Movie
 import com.applications.favorite.databinding.FragmentFavoritesBinding
 import com.applications.ui.FavoriteMoviesAdapter
+import com.applications.utils.JsonParser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -52,8 +53,13 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie){
-        val request = NavDeepLinkRequest.Builder
-            .fromUri("android-app://com.example.themoviedb/movieDetailFragment".toUri())
+        val request = NavDeepLinkRequest.Builder.fromUri(
+            "android-app://com.example.themoviedb/movieDetailFragment?movie=${
+                JsonParser.toJson(
+                    movie
+                )
+            }".toUri()
+        )
             .build()
         findNavController().navigate(request)
     }

@@ -21,6 +21,7 @@ import com.applications.domain.entities.Movie
 import com.applications.search.R
 import com.applications.search.databinding.FragmentSearchBinding
 import com.applications.ui.FavoriteMoviesAdapter
+import com.applications.utils.JsonParser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -109,8 +110,13 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchView.On
     }
 
     private fun onMovieClick(movie: Movie) {
-        val request = NavDeepLinkRequest.Builder
-            .fromUri("android-app://com.example.themoviedb/movieDetailFragment".toUri())
+        val request = NavDeepLinkRequest.Builder.fromUri(
+            "android-app://com.example.themoviedb/movieDetailFragment?movie=${
+                JsonParser.toJson(
+                    movie
+                )
+            }".toUri()
+        )
             .build()
         findNavController().navigate(request)
     }
