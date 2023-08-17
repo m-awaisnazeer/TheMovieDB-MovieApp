@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    alias(libs.plugins.kotlin.android)
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.dagger.hilt.android'
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -38,30 +38,27 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation libs.androidx.core.ktx
+    implementation platform(libs.kotlin.bom)
+    implementation libs.androidx.appcompat
+    implementation libs.material
 
     //Dagger Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-
-    //viewModel
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation libs.glide
 
     //navigation
-    implementation "androidx.fragment:fragment-ktx:1.5.4"
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation libs.androidx.fragment.ktx
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
+
+    //viewModel
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.lifecycle.viewmodel.ktx
+    implementation libs.lifecycle.runtime.ktx
     
     implementation(project(":core:domain"))
     implementation(project(":core:utils"))
