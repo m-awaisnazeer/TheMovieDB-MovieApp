@@ -65,33 +65,6 @@ dependencies {
     implementation libs.hilt.android
     kapt libs.hilt.compiler
 
-    //Unit Test
-    testImplementation libs.powermock.api.mockito2
-    testImplementation libs.powermock.module.junit4
-    testImplementation libs.mockito.core
-    testImplementation libs.mockito.kotlin
-    testImplementation libs.mockito.android
-    testImplementation libs.robolectric
-    testImplementation libs.truth
-    implementation libs.androidx.core
-    testImplementation libs.junit
-    testImplementation libs.hamcrest.all
-    testImplementation libs.androidx.core.testing
-    testImplementation libs.mockito.core
-    testImplementation libs.mockito.kotlin
-    testImplementation libs.mockito.android
-    testImplementation(libs.mockwebserver)
-    testImplementation libs.turbine
-    testImplementation libs.kotlinx.coroutines.test
-    testImplementation libs.junit
-    kaptAndroidTest libs.dagger.hilt.android.compiler
-    androidTestImplementation libs.dagger.hilt.android.testing
-    androidTestImplementation libs.androidx.junit
-    androidTestImplementation libs.androidx.espresso.core
-    androidTestImplementation libs.turbine
-    androidTestImplementation libs.truth
-    androidTestImplementation libs.kotlinx.coroutines.test
-
     // modules
     implementation(project(":core:common"))
     implementation(project(":core:data"))
